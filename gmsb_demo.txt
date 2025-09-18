@@ -1,0 +1,45 @@
+./start.sh
+
+http://localhost:8888/
+
+tto:lives
+	rdf:type rdf:Property;
+	rdfs:label "number of lives"^^xsd:string;
+	rdfs:domain tto:Cat;
+	rdfs:range xsd:decimal .
+	
+
+# Get All Properties of Cat
+SELECT DISTINCT ?property ?domain WHERE {
+  ?property rdfs:domain ?domain .
+  tto:Cat rdfs:subClassOf* ?domain .
+}
+
+
+ttr:Simba
+	rdf:type tto:Cat ;
+	dbp:name "Simba" ;
+	tto:sex "male" ;
+	tto:color "orange";
+	tto:weight 210.9;
+	tto:lives 7 ;
+    .
+
+
+# Get the Lives for each Cat
+SELECT DISTINCT * WHERE {
+  ?thing rdf:type tto:Cat .
+  ?thing dbp:name ?cat_name . 
+  optional {?thing tto:lives ?number_of_lives }.
+}
+
+
+
+
+
+Cats:
+	Simba
+	Shere Khan the tiger
+	Puss in Boots
+	Grumpy Cat
+	Garfield
